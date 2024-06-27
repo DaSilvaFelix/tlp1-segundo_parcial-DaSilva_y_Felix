@@ -15,7 +15,7 @@ const AñadirProduct = (req,res)=>{
         id: Math.floor(Math.random() * 100) + 1,
         name: name,
         quantity: quantity,
-        price: price 
+        price: price.toFixed(2)
         })
         console.log(newProduct.id);      
     res.json(newProduct)
@@ -31,10 +31,22 @@ const actualizarProcut = (req, res)=>{
     searchProduct.quantity = quantity;
     res.json(searchProduct);
 }
+const eliminarProduct = (req, res)=>{
+    const id =  parseInt(req.params.id);
+
+    const searchProduct = db.find((product)=> product.id === id);
+
+    const indexProduct = db.indexOf(searchProduct);
+
+    db.splice(indexProduct, 1);
+
+    res.json('producto eliminado correctamente');
+}
 
 module.exports={
     mostraProductos,
     mostarPorId,
     AñadirProduct,
-    actualizarProcut
+    actualizarProcut,
+    eliminarProduct
 }
