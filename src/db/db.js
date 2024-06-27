@@ -6,3 +6,5 @@ const db = [
         price:9000.99
     }
 ]
+
+module.exports = db;
